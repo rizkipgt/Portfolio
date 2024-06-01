@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Audio Splash Screen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <audio id="audio">
+        <source src="cabriolet.mp3" type="audio/mp3">
+    </audio>
+    <script>
+        function splashToggle() {
+            // Enabling this will cause a fixed header to display underneath the 
+            // overlay but on top of the rest of your page, as well the scroll bar
+            // appearing after the overlay dissapears (otherwise scroll bar will
+            // be on top of the overlay)
+            // function overlayScroll() {
+            //     document.getElementById("header").style.zIndex = "100";
+            //     document.getElementById("overlay").style.display = "none";
+            //     document.getElementById("body").style.overflowY = "scroll";
+            // }
+            // setTimeout(() => { overlayScroll() }, 1400);
+        }
+        function audioPlay() {
+                let audio = document.getElementById("audio");
+                audio.play();
+        }
+    </script>
+    <input type="checkbox" autocomplete="off" id="play-audio-toggle">
+    <input type="checkbox" autocomplete="off" id="mute-audio-toggle">
+    <div id="overlay" class="overlay">
+        <label class="top-label" for="play-audio-toggle" id="play-audio" onclick="audioPlay();splashToggle()">
+            <span class="bar-top">
+                <span class="grow-shrink-top overlay-text no-hover">tap to enter<br><span
+                        class="small-overlay-text">with audio</span></span>
+                <span class="grow-shrink-top overlay-text hover">click to enter<br><span class="small-overlay-text">with
+                        audio</span></span>
+            </span>
+        </label>
+        <label class="bottom-label" for="mute-audio-toggle" id="mute-audio" onclick="splashToggle()">
+            <span class="bar-bot">
+                <span class="grow-shrink-bot overlay-text no-hover">tap to enter<br><span
+                        class="small-overlay-text">muted</span></span>
+                <span class="grow-shrink-bot overlay-text hover">click to enter<br><span
+                        class="small-overlay-text">muted</span></span>
+            </span>
+        </label>
+    </div>
+    <main>
+        <!-- your html content goes here -->
+        <a href="https://github.com/emerconghaile/audio-splash-screen" target="_blank" rel="noopener noreferrer">Made by
+            Emer Conghaile</a>
+    </main>
+</body>
+
+</html>

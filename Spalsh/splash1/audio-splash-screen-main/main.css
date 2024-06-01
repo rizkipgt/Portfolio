@@ -1,0 +1,269 @@
+html {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: black;
+    height: 100%;
+    width: 100%;
+    /* Use this if enabling overlayScroll() scipt */
+    /* overflow: hidden; */
+}
+
+input[type=checkbox] {
+    position: absolute;
+    display: none;
+}
+
+.top-label, .bottom-label {
+    z-index: 1;
+    position: fixed;
+    min-width: 100vw;
+    min-height: 50vh;
+    display: grid;
+    place-content: center;
+    text-align: center;
+    background-color: white;
+    color: black;
+    text-align: center;
+}
+
+.top-label {
+    top: 0;
+}
+
+.bottom-label {
+    bottom: 0;
+}
+
+.no-hover {
+    display: block;
+}
+
+.hover {
+    display: none;
+}
+
+.overlay-text {
+    font-size: 2rem;
+}
+
+.small-overlay-text {
+    font-size: 1rem;
+}
+
+.fullscreen {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+.dim {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-height: 110vh;
+    min-width: 110vw;
+    z-index: -1;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+video::-webkit-media-controls {
+    display:none !important;
+}
+
+.bg-video {
+    z-index: -2;
+}
+
+/* custom animation time properties */
+
+.overlay {
+    --text-grow-duration: 400ms;
+    --slide-delay: 400ms;
+    --slide-duration: 500ms;
+}
+
+/* if audio is played */
+
+#play-audio-toggle:checked~* .grow-shrink-top {
+    animation-fill-mode: forwards;
+    animation-name: text-grow;
+    animation-duration: var(--text-grow-duration);
+}
+
+#play-audio-toggle:checked~* .grow-shrink-bot {
+    animation-fill-mode: forwards;
+    animation-name: text-shrink;
+    animation-duration: var(--text-grow-duration);
+}
+
+#play-audio-toggle:checked~* .bar-top {
+    animation-fill-mode: forwards;
+    animation-name: text-bar-down;
+    animation-delay: 400ms;
+    animation-duration: 500ms;
+}
+
+#play-audio-toggle:checked~* .bar-bot {
+    animation-fill-mode: forwards;
+    animation-name: text-bar-up;
+    animation-delay: 400ms;
+    animation-duration: 500ms;
+}
+
+/* if audio is muted */
+
+#mute-audio-toggle:checked~* .grow-shrink-bot {
+    animation-fill-mode: forwards;
+    animation-name: text-grow;
+    animation-duration: var(--text-grow-duration);
+}
+
+#mute-audio-toggle:checked~* .grow-shrink-top {
+    animation-fill-mode: forwards;
+    animation-name: text-shrink;
+    animation-duration: var(--text-grow-duration);
+}
+
+#mute-audio-toggle:checked~* .bar-top {
+    animation-fill-mode: forwards;
+    animation-name: text-bar-down;
+    animation-delay: 400ms;
+    animation-duration: 400ms;
+}
+
+#mute-audio-toggle:checked~* .bar-bot {
+    animation-fill-mode: forwards;
+    animation-name: text-bar-up;
+    animation-delay: 400ms;
+    animation-duration: 400ms;
+}
+
+@keyframes text-shrink {
+    to {
+        transform: scale(0.7);
+    }
+}
+
+@keyframes text-grow {
+    to {
+        transform: scale(1.2);
+    }
+}
+
+@keyframes text-bar-down {
+    to {
+        transform: translateY(25vh) scale(20, 0.2);
+        background-color: black;
+    }
+}
+
+@keyframes text-bar-up {
+    to {
+        transform: translateY(-25vh) scale(20, 0.2);
+        background-color: black;
+    }
+}
+
+/* slide up overlay */
+
+#play-audio-toggle:checked~* .top-label {
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+    animation-name: slide-up;
+    animation-delay: 900ms;
+    animation-duration: var(--slide-duration);
+}
+
+#play-audio-toggle:checked~* .bottom-label {
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+    animation-name: slide-down;
+    animation-delay: 900ms;
+    animation-duration: var(--slide-duration);
+}
+
+#mute-audio-toggle:checked~* .top-label {
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+    animation-name: slide-up;
+    animation-delay: 900ms;
+    animation-duration: var(--slide-duration);
+}
+
+#mute-audio-toggle:checked~* .bottom-label {
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+    animation-name: slide-down;
+    animation-delay: 900ms;
+    animation-duration: var(--slide-duration);
+}
+
+@keyframes slide-up {
+    to {
+        transform: translateY(-100vh);
+    }
+}
+
+@keyframes slide-down {
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .grow-shrink-top {
+        transition: transform 250ms ease;
+    }
+    .grow-shrink-top:hover {
+        transform: scale(1.1);
+    }
+    .grow-shrink-bot {
+        transition: transform 250ms ease;
+    }
+    .grow-shrink-bot:hover {
+        transform: scale(1.1);
+    }
+}
+
+@media (hover: hover) {
+    .hover {
+        display: block;
+    }
+    .no-hover {
+        display: none;
+    }
+    .about-icons a:hover .icon {
+        transform: scale(1.5);
+    }
+    .about-icons a:active .icon {
+        transform: none;
+    }
+}
+
+main {
+    width: 100%;
+    height: 100%;
+}
+
+a {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -100px;
+    font-size: 2rem;
+    color: white;
+}
